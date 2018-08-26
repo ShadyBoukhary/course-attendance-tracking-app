@@ -1,0 +1,30 @@
+<ion-header >
+  <ion-navbar transparent>
+
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+  <!-- <div class="img">
+    <img src="../../assets/imgs/logo.pn" alt="no image">
+  </div> -->
+  <div class="logo">Create Account</div>
+
+  <ion-item no-lines class="item">
+    <ion-input type="email" placeholder="Email" [(ngModel)]="account.email"></ion-input>
+  </ion-item>
+
+  <ion-item no-lines class="item">
+    <ion-input type="password" placeholder="Password" [(ngModel)]="account.password"></ion-input>
+  </ion-item>
+
+  <ion-item no-lines class="item">
+    <ion-input type="password" placeholder="Confirm Password" [(ngModel)]="password"></ion-input>
+  </ion-item>
+  <div>
+    <button  class="login" round class="login-translucent" ion-button block (click)="register()">Register</button>
+
+  </div>
+
+</ion-content>
