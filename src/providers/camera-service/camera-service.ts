@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Camera, CameraOptions } from '@ionic-native/camera';
+import { normalizeURL } from 'ionic-angular';
+
 
 /*
   Generated class for the CameraServiceProvider provider.
@@ -31,7 +33,7 @@ export class CameraServiceProvider {
     try {
       let imageData = await this.camera.getPicture(this.options);
       console.log(imageData);
-      return imageData;
+      return normalizeURL(imageData);
     } catch (e) {
       throw e;
     }
