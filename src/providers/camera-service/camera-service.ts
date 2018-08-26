@@ -28,6 +28,7 @@ export class CameraServiceProvider {
   async takePicture() {
     try {
       let imageData = await this.camera.getPicture(this.options);
+      alert(imageData);
       console.log(imageData);
       return imageData;
     } catch (e) {
