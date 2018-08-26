@@ -22,6 +22,8 @@ export class CameraServiceProvider {
       saveToPhotoAlbum: false,
       allowEdit: false,
       correctOrientation: true,
+      targetHeight: 1920,
+      targetWidth: 1080
     };
   }
 
