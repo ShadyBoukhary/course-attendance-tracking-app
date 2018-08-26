@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import { CameraServiceProvider } from '../../providers/camera-service/camera-service';
+import { DomSanitizer } from '@angular/platform-browser';
 
 /**
  * Generated class for the HomePage page.
@@ -18,7 +19,8 @@ export class HomePage {
 
   imageData: string;
   constructor(public navCtrl: NavController, public navParams: NavParams,
-    private cam: CameraServiceProvider, private toast: ToastController) {
+    private cam: CameraServiceProvider, private toast: ToastController,
+    public domSanitizer: DomSanitizer) {
   }
 
   ionViewDidLoad() {
@@ -37,7 +39,7 @@ export class HomePage {
   }
 
   async submit() {
-    
+
   }
 
   delete() {

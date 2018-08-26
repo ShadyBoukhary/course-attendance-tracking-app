@@ -17,7 +17,7 @@
 
     <ion-card>
         <div *ngIf="imageData; else upload">
-          <img class="image1" [src]="imageData" alt="image source">
+          <img class="image1" [src]="domSanitizer.bypassSecurityTrustUrl(imageData)" alt="image source">
         </div>
         <ng-template #upload>
           <div class="upload" (click)="takePhoto()">
