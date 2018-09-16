@@ -15,7 +15,7 @@
 
 <ion-content>
 
-    <ion-card>
+    <ion-card style="margin-top: 5%;">
         <div *ngIf="imageData; else upload">
           <img class="image1" [src]="domSanitizer.bypassSecurityTrustUrl(imageData)" alt="image source">
         </div>
@@ -29,5 +29,4 @@
         <button color="primary" ion-button block (click)="submit()">Submit</button>
         <button *ngIf="imageData" color="danger" ion-button block (click)="delete()">Delete</button>
       </div>
-      <p>{{imageData}}</p>
 </ion-content>

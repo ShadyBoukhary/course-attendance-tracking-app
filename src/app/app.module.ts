@@ -8,6 +8,11 @@ import { AngularFireDatabaseModule } from 'angularfire2/database-deprecated';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireStorageModule } from 'angularfire2/storage';
 import { FIREBASE_CONFIG } from '../firebase-config/app.firebase.config';
+import { HttpClientModule } from '@angular/common/http';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { IonicStorageModule } from '@ionic/storage';
+
+
 
 import { MyApp } from './app.component';
 import { AuthServiceProvider } from '../providers/auth-service/auth-service';
@@ -15,6 +20,7 @@ import { DataServiceProvider } from '../providers/data-service/data-service';
 import { NetworkServiceProvider } from '../providers/network-service/network-service';
 import { CameraServiceProvider } from '../providers/camera-service/camera-service';
 import { Camera } from '@ionic-native/camera';
+import { UtilitiesProvider } from '../providers/utilities/utilities';
 
 @NgModule({
   declarations: [
@@ -27,6 +33,9 @@ import { Camera } from '@ionic-native/camera';
     AngularFireAuthModule,
     AngularFireDatabaseModule,
     AngularFireStorageModule,
+    HttpClientModule,
+    BrowserAnimationsModule,
+    IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -40,7 +49,8 @@ import { Camera } from '@ionic-native/camera';
     DataServiceProvider,
     NetworkServiceProvider,
     CameraServiceProvider,
-    Camera
+    Camera,
+    UtilitiesProvider,
   ]
 })
 export class AppModule {}

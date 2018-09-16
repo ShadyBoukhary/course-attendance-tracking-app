@@ -30,33 +30,39 @@ export class RegisterPage {
   }
 
   async register() {
-    if (this.account.password === this.password) {
-      let load = this.loading.create({
-        spinner: 'crescent',
-        content: 'Creating account...'
-      });
-      load.present();
-      let response = await this.auth.createUserWithEmailAndPassword(this.account);
-      if (!response.error) {
-        this.toast.create({
-          message: 'Account created successfully',
-          duration: 1500
-        }).present();
-        this.navCtrl.pop();
-      } else {
-        this.toast.create({
-          message: response.error.message,
-          duration: 3000
-        }).present();
-        console.log(response.error.message);
-      }
-      load.dismiss();
-    } else {
-      this.toast.create({
-        message: 'Password mismatch',
-        duration: 1500
-      }).present();
+    // if (this.account.password === this.password) {
+    //   let load = this.loading.create({
+    //     spinner: 'crescent',
+    //     content: 'Creating account...'
+    //   });
+    //   load.present();
+    //   let response = await this.auth.createUserWithEmailAndPassword(this.account);
+    //   if (!response.error) {
+    //     this.toast.create({
+    //       message: 'Account created successfully',
+    //       duration: 1500
+    //     }).present();
+    //     this.navCtrl.pop();
+    //   } else {
+    //     this.toast.create({
+    //       message: response.error.message,
+    //       duration: 3000
+    //     }).present();
+    //     console.log(response.error.message);
+    //   }
+    //   load.dismiss();
+    // } else {
+    //   this.toast.create({
+    //     message: 'Password mismatch',
+    //     duration: 1500
+    //   }).present();
+    // }
+    try {
+      await this.auth.signUp();
+    } catch(e) {
+      console.log(e);
     }
+    
   }
 
 }
