@@ -58,7 +58,7 @@ export class AuthServiceProvider {
 
     return new Promise((resolve, reject) => {
       this.http.post(`${APIConstants.baseUrl}${APIConstants.signUpUrl}`, JSON.stringify(data), header)
-        .subscribe(dat => {
+        .subscribe((dat: any) => {
           console.log(dat);
           if (dat.status === '400') {
             reject(dat.message);

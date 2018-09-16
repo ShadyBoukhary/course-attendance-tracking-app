@@ -45,7 +45,7 @@ export class DataServiceProvider {
     // Make HTTP Request
     return new Promise((resolve, reject) => {
       this.http.get(`${APIConstants.baseUrl}${APIConstants.userUrl}/${userId}`, {headers: headers})
-        .subscribe(dat => {
+        .subscribe((dat: any) => {
           if (dat.status === '404') {
             reject(dat.message);
           }
@@ -79,7 +79,7 @@ export class DataServiceProvider {
     // Make HTTP Request
     return new Promise((resolve, reject) => {
       this.http.put(`${APIConstants.baseUrl}${APIConstants.userUrl}/${userId}`, JSON.stringify(user), {headers})
-        .subscribe(dat => {
+        .subscribe((dat: any) => {
           if (dat.status === '404') {
             reject(dat.message);
           }
