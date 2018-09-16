@@ -1,5 +1,10 @@
 page-login {
 
+    ion-content { 
+        background: url('../../assets/imgs/background-blurred.jpg') no-repeat center center fixed; 
+        background-size: cover;
+      } 
+
     .button-center {
         text-align: center;
     }
@@ -11,7 +16,8 @@ page-login {
         width: auto ;
         text-align: center;
         display: block;
-        margin-bottom: 50px;
+        margin-top: -15%;
+       // margin-bottom: 50px;
       }
       .login {
         padding-top: 3%;
@@ -20,30 +26,44 @@ page-login {
       }
 
       .ion-card {
+          margin-top: -5%;
           background-color: transparent;
       }
       .register-translucent {
+          margin-top: 1%;
+          margin-left: 3%;
+          margin-right: 3%;
           font-weight: bold;
+          width: 94%;
           text-align: center;
-          //color: white;
-          //background-color: transparentize($color: rgb(255, 255, 255), $amount: 0.7) !important;
+          color: white;
+          height: 45px;
+          background-color: transparentize($color: gold, $amount: 0.7) !important;
+
+          
       }
       .login-translucent {
           margin-top: 10%;
-          //background-color: transparentize($color: rgb(255, 255, 255), $amount: 0.7) !important;
+          margin-left: 3%;
+          margin-right: 3%;
+          background-color: transparentize($color: maroon, $amount: 0.3) !important;
           font-weight: bold;
-          width: 100%;
+          width: 94%;
           height: 45px;
       }
 
       .item {
-          ::placeholder {color: black}
-          color: color;
-          background-color: transparentize($color: gray, $amount: 0.7) !important;
-          margin-top: 10px;
-          border-radius: 25px;
+          ::placeholder {color: white}
+          color: white;
+          background-color:transparentize($color: rgb(255,255,255), $amount: 0.75) !important;
+         // margin-top: 10px;
+         // border-radius: 25px;
           width: 100%;
           height: 30px;
       }
+
+
+       
+   
 
 }

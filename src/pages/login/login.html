@@ -1,21 +1,19 @@
-<ion-content padding class="background">
+<ion-content class="background">
 
-  <div class="img">
-    <img src="assets/imgs/logo.jpg" alt="Image Missing">
+  <div padding class="img">
+    <img src="assets/imgs/logo.png" alt="Image Missing">
   </div>
+  <ion-card class="ion-card">
+    <ion-item no-lines class="item">
+      <ion-input type="email" placeholder="Email" [(ngModel)]="account.email"></ion-input>
+    </ion-item>
 
-  <ion-item no-lines class="item">
-    <ion-input type="email" placeholder="Email" [(ngModel)]="account.email"></ion-input>
-  </ion-item>
+    <ion-item no-lines class="item">
+      <ion-input type="password" placeholder="Password" [(ngModel)]="account.password"></ion-input>
+    </ion-item>
+  </ion-card>
 
-  <ion-item no-lines class="item">
-    <ion-input type="password" placeholder="Password" [(ngModel)]="account.password"></ion-input>
-  </ion-item>
+  <button class="login" class="login-translucent" full ion-button (click)="login()">Login</button>
+  <button class="register-translucent" ion-button  (click)=register()>Create Account</button>
 
-  <button class="login" round class="login-translucent" ion-button block (click)="login()">Login</button>
-
-  <div style="text-align: center;margin-top: 10%">Don't have an account yet?</div>
-  <div style="text-align: center">
-  <button class="register-translucent" ion-button outline small (click)=register()>Create Account</button>
-  </div>
 </ion-content>

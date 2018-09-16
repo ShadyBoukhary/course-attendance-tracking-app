@@ -9,11 +9,18 @@ import { APIConstants, StorageConstants } from '../constants';
 @Injectable()
 export class AuthServiceProvider {
 
-  userId: String;
+  userId: string;
   constructor(private http: HttpClient, private storage: Storage) {
     this.userId = null;
   }
 
+  /**
+   *
+   *
+   * @param {Account} account
+   * @returns
+   * @memberof AuthServiceProvider
+   */
   async login(account: Account) {
 
     var header = { "headers": { "Content-Type": "application/json" } };
@@ -21,15 +28,9 @@ export class AuthServiceProvider {
     return new Promise((resolve, reject) => {
       this.http.post(`${APIConstants.baseUrl}${APIConstants.loginUrl}`, JSON.stringify(account), header)
         .subscribe((dat: LoginResponse) => {
-          console.log(dat);
           this.userId = dat.userId as string;
-          console.log(StorageConstants.USER_ID_KEY);
-          console.log(StorageConstants.AUTHENTICATED);
-          console.log(this.userId);
-          this.storage.set(StorageConstants.USER_ID_KEY, this.userId);
-          this.storage.set(StorageConstants.AUTHENTICATED, true);
-
-          resolve(dat);
+          this.saveLoginData(this.userId, dat.token)
+            .then(() => { resolve(dat); })
         },
           error => {
             console.log(error);
@@ -41,23 +42,22 @@ export class AuthServiceProvider {
     });
   }
 
-  signUp() {
+  signUp(account: Account) {
     var data = {
-      "email": "test@test.com",
-      "password": "12345",
-      "firstName": "Shady",
-      "lastName": "Boukhary",
-      "department": "cmps",
-      "title": "student",
-      "phone": "234213",
-      "office": "232"
-
+      email: account.email,
+      password: account.password,
+      firstName: "",
+      lastName: "",
+      department: "",
+      title: "",
+      phone: "",
+      office: ""
     };
 
     var header = { "headers": { "Content-Type": "application/json" } };
 
     return new Promise((resolve, reject) => {
-      this.http.post(`${APIConstants.baseUrl}${APIConstants.signUpUrl}`, data, header)
+      this.http.post(`${APIConstants.baseUrl}${APIConstants.signUpUrl}`, JSON.stringify(data), header)
         .subscribe(dat => {
           console.log(dat);
           if (dat.status === '400') {
@@ -76,7 +76,6 @@ export class AuthServiceProvider {
     if (this.userId === null) {
       try {
         let uid = await this.storage.get(StorageConstants.USER_ID_KEY);
-        console.log(uid);
         return uid;
       } catch (e) {
         console.log(e);
@@ -90,12 +89,23 @@ export class AuthServiceProvider {
   async isAuthenticated() {
     try {
       let auth = await this.storage.get(StorageConstants.AUTHENTICATED);
-      if (auth === null) {return false;}
+      if (auth === null) { return false; }
       return auth;
-    } catch(e) {
+    } catch (e) {
       console.log(e);
       return false;
     }
+  }
+
+  async getJWT(): Promise<string> {
+    let jwt = await this.storage.get(StorageConstants.JSON_WEB_TOKEN);
+    return jwt;
+  }
+
+  async saveLoginData(userId: string, token: string) {
+    await this.storage.set(StorageConstants.USER_ID_KEY, userId);
+    await this.storage.set(StorageConstants.AUTHENTICATED, true);
+    await this.storage.set(StorageConstants.JSON_WEB_TOKEN, token);
   }
 
 

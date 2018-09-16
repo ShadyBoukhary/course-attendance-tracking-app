@@ -2,13 +2,8 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController, LoadingController } from 'ionic-angular';
 import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
 import { Account } from '../../models/account/account.interface';
+import { UtilitiesProvider } from '../../providers/utilities/utilities';
 
-/**
- * Generated class for the RegisterPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -19,9 +14,8 @@ export class RegisterPage {
 
   password: string;
   account = {} as Account;
-  constructor(public navCtrl: NavController, public navParams: NavParams,
-    private auth: AuthServiceProvider, private toast: ToastController,
-    private loading: LoadingController) {
+  constructor(public navCtrl: NavController,
+    private auth: AuthServiceProvider, private utilities: UtilitiesProvider) {
       this.account = {} as Account;
   } 
 
@@ -30,39 +24,45 @@ export class RegisterPage {
   }
 
   async register() {
-    // if (this.account.password === this.password) {
-    //   let load = this.loading.create({
-    //     spinner: 'crescent',
-    //     content: 'Creating account...'
-    //   });
-    //   load.present();
-    //   let response = await this.auth.createUserWithEmailAndPassword(this.account);
-    //   if (!response.error) {
-    //     this.toast.create({
-    //       message: 'Account created successfully',
-    //       duration: 1500
-    //     }).present();
-    //     this.navCtrl.pop();
-    //   } else {
-    //     this.toast.create({
-    //       message: response.error.message,
-    //       duration: 3000
-    //     }).present();
-    //     console.log(response.error.message);
-    //   }
-    //   load.dismiss();
-    // } else {
-    //   this.toast.create({
-    //     message: 'Password mismatch',
-    //     duration: 1500
-    //   }).present();
-    // }
-    try {
-      await this.auth.signUp();
-    } catch(e) {
-      console.log(e);
+    let load = this.utilities.createLoading('Creating account...');
+    if (this.isValidInput()) {
+      if (this.account.password === this.password) {
+
+        if (this.utilities.validateEmail(this.account.email)) {
+          load.present();
+
+        // Create Account
+
+        try {
+
+          await this.auth.signUp(this.account);
+          this.utilities.createToast('Account created!', 3000).present();
+          this.navCtrl.pop();
+
+        } catch(e) {
+
+          this.utilities.createToast(e, 3000).present();
+          console.log(e);
+        }
+
+        load.dismiss();
+
+        } else { /* Invalid email format */
+          this.utilities.createToast('Invalid email format.', 3000).present();
+        }
+        
+      } else { /* Passwords do not match */
+        this.utilities.createToast('Passwords do not match.', 3000).present();
+      }
+
+    } else {  /* If empty fields  */
+      this.utilities.createToast('Email or password cannot be empty.', 3000).present();
     }
-    
+
+  }
+
+  isValidInput() {
+    return this.password != null && this.account.email != null && this.account.password != '' && this.password != '' && this.account.email != '' && this.account.password != '';
   }
 
 }

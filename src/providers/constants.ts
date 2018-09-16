@@ -9,4 +9,5 @@ export class APIConstants {
 export class StorageConstants {
     static readonly USER_ID_KEY = 'userId';
     static readonly AUTHENTICATED = 'authenticated';
+    static readonly JSON_WEB_TOKEN = 'x-access-token';
 }
