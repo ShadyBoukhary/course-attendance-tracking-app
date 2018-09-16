@@ -3,17 +3,29 @@
   <div padding class="img">
     <img src="assets/imgs/logo.png" alt="Image Missing">
   </div>
-  <ion-card class="ion-card">
-    <ion-item no-lines class="item">
-      <ion-input type="email" placeholder="Email" [(ngModel)]="account.email"></ion-input>
-    </ion-item>
+  <ion-item no-lines class="item">
+    <ion-input type="email" placeholder="Email" [(ngModel)]="account.email"></ion-input>
+  </ion-item>
 
-    <ion-item no-lines class="item">
-      <ion-input type="password" placeholder="Password" [(ngModel)]="account.password"></ion-input>
-    </ion-item>
-  </ion-card>
+  <ion-item no-lines class="item">
+    <ion-input type="password" placeholder="Password" [(ngModel)]="account.password"></ion-input>
+  </ion-item>
+  <ion-row>
+    <ion-col col-6>
+      <button class="register-translucent" clear small ion-button (click)=register()>Don't have an account?</button>
 
-  <button class="login" class="login-translucent" full ion-button (click)="login()">Login</button>
-  <button class="register-translucent" ion-button  (click)=register()>Create Account</button>
+    </ion-col>
+    <ion-col col-6>
+      <div style="text-align: end">
+        <button class="forgot-translucent" clear small ion-button (click)=register()>Forgot password?</button>
+
+      </div>
+    </ion-col>
+
+
+  </ion-row>
+
+
+  <button class="login" class="login-translucent" round full ion-button (click)="login()">Login</button>
 
 </ion-content>

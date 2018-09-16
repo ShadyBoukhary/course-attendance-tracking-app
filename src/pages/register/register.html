@@ -11,7 +11,6 @@
   </div> -->
   <div class="logo">Create Account</div>
 
-  <ion-card class="ion-card">
       <ion-item no-lines class="item">
         <ion-input type="email" placeholder="Email" [(ngModel)]="account.email"></ion-input>
       </ion-item>
@@ -23,11 +22,10 @@
       <ion-item no-lines class="item">
           <ion-input type="password" placeholder="Confirm Password" [(ngModel)]="password"></ion-input>
         </ion-item>
-    </ion-card>
 
   
   <div>
-    <button  class="login"  class="login-translucent" ion-button block (click)="register()">Create Account</button>
+    <button  class="login"  class="login-translucent" ion-button full round (click)="register()">Create Account</button>
 
   </div>
 

@@ -19,7 +19,7 @@ page-register {
         margin-top: 10%;
         margin-left: 3%;
         margin-right: 3%;
-        background-color: transparentize($color: maroon, $amount: 0.3) !important;
+        background-color: maroon;
         font-weight: bold;
         width: 94%;
         height: 45px;
@@ -28,10 +28,12 @@ page-register {
     .item {
         ::placeholder {color: white}
         color: white;
-        background-color:transparentize($color: rgb(255,255,255), $amount: 0.7) !important;
-       // margin-top: 10px;
-       // border-radius: 25px;
-        width: 100%;
+        background-color:transparentize($color: rgb(255,255,255), $amount: 0.75) !important;
+        margin-top: 10px;
+        margin-left: 3%;
+        margin-right: 3%;
+        border-radius: 25px;
+        width: 94%;
         height: 30px;
     }
     .logo {
