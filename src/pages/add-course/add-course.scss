@@ -19,4 +19,11 @@ page-add-course {
         font-size: medium;
         font-weight: bold
     }
+
+    .list-md>.item-block:first-child {
+        border-top: none;
+    }
+    .list-md>.item-block:last-child {
+        border-bottom: none;
+    }
 }

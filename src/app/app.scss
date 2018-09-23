@@ -23,6 +23,18 @@ ion-navbar {
     color: black;
 }
 
+@media only screen and (orientation: landscape)  {
+    ion-modal {
+     .modal-wrapper {
+       position: absolute;
+       top: 0 !important;
+       left: 0 !important;
+       display: block;
+       width: 100% !important;
+       height: 100% !important;
+     } 
+   }
+ }
 
 // .item {
 //     ::placeholder {color: black}

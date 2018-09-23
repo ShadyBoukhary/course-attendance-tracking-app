@@ -1,7 +1,7 @@
 page-login {
 
     ion-content { 
-        background: url('../../assets/imgs/background-blurred.jpg') no-repeat center center fixed; 
+        background: url('../../assets/imgs/background-tint.jpg') no-repeat center center fixed; 
         background-size: cover;
       } 
 
@@ -51,7 +51,8 @@ page-login {
           margin-top: 10%;
           margin-left: 3%;
           margin-right: 3%;
-          background-color:  maroon;
+         // background-color:transparentize($color: #a1480d, $amount: 0) !important;
+
           font-weight: bold;
           width: 94%;
           height: 45px;

@@ -23,6 +23,8 @@ import { CameraServiceProvider } from '../providers/camera-service/camera-servic
 import { Camera } from '@ionic-native/camera';
 import { UtilitiesProvider } from '../providers/utilities/utilities';
 import {FormsModule,  ReactiveFormsModule } from '@angular/forms';
+import { AnimatorModule } from 'css-animator';
+
 
 
 @NgModule({
@@ -40,7 +42,8 @@ import {FormsModule,  ReactiveFormsModule } from '@angular/forms';
     BrowserAnimationsModule,
     IonicStorageModule.forRoot(),
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    AnimatorModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [

@@ -6,6 +6,7 @@ import { UtilitiesProvider } from '../../providers/utilities/utilities';
 import { Course } from '../../models/course';
 
 
+
 /**
  * Generated class for the CoursesPage page.
  *
@@ -28,10 +29,12 @@ import { Course } from '../../models/course';
 })
 export class CoursesPage {
 
+  toggledIndex: number;
   visibility: String;
   courses: Course[];
   constructor(public navCtrl: NavController, private modal: ModalController, private data: CourseDataServiceProvider, private utilities: UtilitiesProvider, private detector: ChangeDetectorRef) {
     this.visibility = 'hidden';
+    this.toggledIndex = -1;
   }
 
   ionViewWillLoad() {
@@ -44,8 +47,9 @@ export class CoursesPage {
   }
 
   navigateTo(page: string) {
-    this.detector.detach();
-    let modal = this.modal.create(page);
+    let modal = this.modal.create(page, null, {
+      cssClass: 'full-modal'
+    });
     modal.present();
   }
 
@@ -61,8 +65,17 @@ export class CoursesPage {
   }
 
   getRandomImage() {
-    let random = Math.floor(Math.random() * 11);
+    let random = Math.floor(Math.random() * 12);
     return `assets/imgs/image${random}.jpg`;
+  }
+
+  toggleButtons(i: number) {
+    if (i === this.toggledIndex) {
+      this.toggledIndex = -1;
+    } else {
+      this.toggledIndex = i;
+    }
+  
   }
 
 }

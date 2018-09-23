@@ -8,12 +8,12 @@
 
   <ion-navbar>
     <ion-title>New Course</ion-title>
-    <ion-buttons left>
+    <ion-buttons start>
       <button ion-button (click)="dismiss()">
         Cancel
       </button>
     </ion-buttons>
-    <ion-buttons right>
+    <ion-buttons end>
       <button ion-button [disabled]="!createCourseForm.valid" (click)="save()">
         Save
       </button>

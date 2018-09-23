@@ -227,6 +227,14 @@ export class Course {
         return this.endDate;
     }
 
+    getFormattedStartDate() {
+        return new Date(this.startDate).toDateString();
+    }
+
+    getFormattedEndDate() {
+        return new Date(this.endDate).toDateString();
+    }
+
     // toJSON() {
     //     return JSON.stringify(this);
     // }

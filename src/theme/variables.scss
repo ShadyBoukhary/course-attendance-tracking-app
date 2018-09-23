@@ -22,8 +22,10 @@ $app-direction: ltr;
 // To view all the possible Ionic variables, see:
 // http://ionicframework.com/docs/theming/overriding-ionic-variables/
 //$text-input-placeholder-color: white;
-$toolbar-background: #9F0324;
-
+//$toolbar-background: #9F0324;
+$toolbar-background: #002171;
+$modal-inset-width: 100%;
+$modal-inset-height-large: 100%;
 
 
 // Named Color Variables
@@ -35,8 +37,8 @@ $toolbar-background: #9F0324;
 // The "primary" color is the only required color in the map.
 
 $colors: (
-  primary:    #9F0324,
-  secondary:  #32db64,
+  primary:    #002171,
+  secondary:  #020202,
   danger:     #f53d3d,
   light:      #f4f4f4,
   dark:       #222
@@ -59,6 +61,9 @@ $text-input-md-show-valid-highlight: $text-input-md-show-focus-highlight !defaul
 $text-input-md-show-invalid-highlight: $text-input-md-show-focus-highlight !default;
 $list-md-header-font-size: 20px;
 $item-md-detail-push-show: true;
+$list-md-header-border-top: 1px;
+$list-md-header-margin-bottom: 1px;
+$list-md-margin-bottom: 30px;
 
 
 
