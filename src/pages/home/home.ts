@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController, ViewController } from 'ionic-angular';
 import { CameraServiceProvider } from '../../providers/camera-service/camera-service';
 import { DomSanitizer } from '@angular/platform-browser';
 import { DataServiceProvider } from '../../providers/data-service/data-service';
-import { User } from '../../models/user';
+import { Course } from '../../models/course';
+import { UtilitiesProvider } from '../../providers/utilities/utilities';
+import {ImageDataServiceProvider} from '../../providers/data-service/image-data-service';
 
 /**
  * Generated class for the HomePage page.
@@ -20,55 +22,39 @@ import { User } from '../../models/user';
 export class HomePage {
 
   imageData: string;
-  profile: User;
+  course: Course;
   constructor(public navCtrl: NavController, public navParams: NavParams,
-    private cam: CameraServiceProvider, private toast: ToastController,
-    public domSanitizer: DomSanitizer, private data: DataServiceProvider) {
+    private cam: CameraServiceProvider, public domSanitizer: DomSanitizer,
+    private view: ViewController, private utilities: UtilitiesProvider,
+    private data: ImageDataServiceProvider) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad HomePage');
-    this.getUser();
-    
+    this.course = this.navParams.get('course');
   }
 
   async takePhoto() {
     try {
       this.imageData = await this.cam.takePicture();
     } catch (e) {
-      this.toast.create({
-        message: e.message,
-        duration: 3000
-      }).present();
+      this.utilities.createToast(e, 3000).present();
     }
   }
 
   async submit() {
-
-  }
-
-  async getUser() {
     try {
-      
-      this.profile = await this.data.getUserProfile() as User;
-      console.log(this.profile);
-      this.update();
+      await this.data.uploadImage(this.imageData, this.course.getId());
     } catch (e) {
-      console.log(e);
-    }
-  }
-
-  async update() {
-    try {
-      
-       let prof = await this.data.updateUserProfile(this.profile);
-      console.log(prof);
-    } catch (e) {
-      console.log(e);
+      alert(e.message);
     }
   }
 
   delete() {
     this.imageData = null;
+  }
+
+  dismiss() {
+    this.view.dismiss();
   }
 }

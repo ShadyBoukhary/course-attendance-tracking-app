@@ -108,6 +108,15 @@ export class AuthServiceProvider {
     await this.storage.set(StorageConstants.JSON_WEB_TOKEN, token);
   }
 
+  async signOut() {
+    try {
+      await this.storage.clear();
+    } catch(e) {
+      throw e;
+    }
+    
+  }
+
 
 
 

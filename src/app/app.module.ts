@@ -20,10 +20,13 @@ import { DataServiceProvider } from '../providers/data-service/data-service';
 import { CourseDataServiceProvider } from '../providers/data-service/course-data-service';
 import { NetworkServiceProvider } from '../providers/network-service/network-service';
 import { CameraServiceProvider } from '../providers/camera-service/camera-service';
+import { ImageDataServiceProvider } from '../providers/data-service/image-data-service';
 import { Camera } from '@ionic-native/camera';
 import { UtilitiesProvider } from '../providers/utilities/utilities';
 import {FormsModule,  ReactiveFormsModule } from '@angular/forms';
 import { AnimatorModule } from 'css-animator';
+import { File } from '@ionic-native/file';
+import { FileTransfer } from '@ionic-native/file-transfer';
 
 
 
@@ -59,7 +62,10 @@ import { AnimatorModule } from 'css-animator';
     CameraServiceProvider,
     Camera,
     UtilitiesProvider,
-    CourseDataServiceProvider
+    CourseDataServiceProvider,
+    ImageDataServiceProvider,
+    File,
+    FileTransfer
   ]
 })
 export class AppModule {}

@@ -13,6 +13,9 @@
         <ion-icon name="add"></ion-icon>
       </button>
     </ion-buttons>
+    <ion-buttons start>
+      <button ion-button (click)="signOut()">Sign Out</button>
+    </ion-buttons>
   </ion-navbar>
 
 </ion-header>
@@ -20,36 +23,36 @@
 
 <ion-content class="background card-background-page">
 
-  <ion-card *ngFor="let course of courses; let i = index" [@visibilityChanged]="visibility" style="opacity: 0" >
+  <ion-card *ngFor="let course of courses; let i = index" [@visibilityChanged]="visibility" style="opacity: 0">
     <div tappable (click)="toggleButtons(i)" class="image-container">
       <img *one-time [src]="getRandomImage()" />
-      
+
       <div class="card-title">{{course.getDepartment()}} {{course.getCourseNum()}}-{{course.getSection()}}</div>
       <div class="card-subtitle">{{course.getTerm()}} {{course.getYear()}}</div>
     </div>
 
     <ion-fab right top>
-        <button class="translucent-fab" ion-fab>
-          <ion-icon  name="camera"></ion-icon>
-        </button>
-      </ion-fab>
+      <button class="translucent-fab" ion-fab (click)="openCourse(course)">
+        <ion-icon name="camera"></ion-icon>
+      </button>
+    </ion-fab>
 
-    
 
-    <div style="text-align:initial; height: 100px;" id="buttons" *ngIf="toggledIndex === i">
 
-        <ion-item>
-            <ion-icon color="primary" name="calendar" item-start ></ion-icon>
-            <h3 style="color:gray">{{course.getFormattedStartDate()}} - {{course.getFormattedEndDate()}}</h3>
-          </ion-item>
+    <div style="text-align:initial; " id="buttons" *ngIf="toggledIndex === i">
 
       <ion-item>
-        <ion-icon color="primary" name="compass" item-start ></ion-icon>
+        <ion-icon color="primary" name="calendar" item-start></ion-icon>
+        <h3 style="color:gray">{{course.getFormattedStartDate()}} - {{course.getFormattedEndDate()}}</h3>
+      </ion-item>
+
+      <ion-item>
+        <ion-icon color="primary" name="compass" item-start></ion-icon>
         <h3 style="color:gray;">{{course.getBuilding()}} {{course.getRoom()}}</h3>
       </ion-item>
 
-      
-    
+
+
     </div>
 
   </ion-card>

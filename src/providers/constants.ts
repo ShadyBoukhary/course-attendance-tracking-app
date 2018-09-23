@@ -4,7 +4,8 @@ export class APIConstants {
     static readonly loginUrl = '/login';
     static readonly signUpUrl = '/users';
     static readonly userUrl = '/users';
-    static readonly createCourseUrl = '/courses'
+    static readonly createCourseUrl = '/courses';
+    static readonly createImageIUrl = '/images';
 }
 
 export class StorageConstants {

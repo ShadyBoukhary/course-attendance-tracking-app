@@ -2,6 +2,7 @@ import { Component, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/
 import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 import { trigger, state, style, animate, transition } from '@angular/animations';
 import { CourseDataServiceProvider } from '../../providers/data-service/course-data-service';
+import {AuthServiceProvider} from '../../providers/auth-service/auth-service';
 import { UtilitiesProvider } from '../../providers/utilities/utilities';
 import { Course } from '../../models/course';
 
@@ -32,7 +33,8 @@ export class CoursesPage {
   toggledIndex: number;
   visibility: String;
   courses: Course[];
-  constructor(public navCtrl: NavController, private modal: ModalController, private data: CourseDataServiceProvider, private utilities: UtilitiesProvider, private detector: ChangeDetectorRef) {
+  constructor(public navCtrl: NavController, private modal: ModalController, private data: CourseDataServiceProvider, private utilities: UtilitiesProvider, private detector: ChangeDetectorRef,
+              private auth: AuthServiceProvider) {
     this.visibility = 'hidden';
     this.toggledIndex = -1;
   }
@@ -76,6 +78,21 @@ export class CoursesPage {
       this.toggledIndex = i;
     }
   
+  }
+
+  openCourse(course: Course) {
+    let modal = this.modal.create('HomePage', {course: course});
+    modal.present();
+  }
+
+  async signOut() {
+    try {
+      await this.auth.signOut();
+      this.navCtrl.setRoot('LoginPage');
+    } catch (e) {
+      
+    }
+    
   }
 
 }
