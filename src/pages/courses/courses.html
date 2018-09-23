@@ -20,7 +20,7 @@
 
 <ion-content class="background card-background-page">
   <ion-card *ngFor="let course of courses"  [@visibilityChanged]="visibility" style="opacity: 0" tappable (click)="animate()">
-      <img src="https://img.theculturetrip.com/fit-in/1024x/wp-content/uploads/2017/05/5507899161_0172566242_b.jpg"/>
+      <img height="200" src="{{ getRandomImage() }}"/>
       <div class="card-title">{{course.getDepartment()}} {{course.getCourseNum()}}-{{course.getSection()}}</div>
       <div class="card-subtitle">{{course.getTerm()}} {{course.getYear()}}</div>
   </ion-card>
