@@ -1,3 +1,22 @@
 page-add-course {
+    .item {
+        background-color: whitesmoke;
+    }
+    .label-item {
+        color: gray;
+       // font-style: italic;
+    }
 
+    .error {
+        color: red;
+        padding-left: 14px;
+
+    }
+
+    .header {
+        color: black;
+        background-color: transparent;
+        font-size: medium;
+        font-weight: bold
+    }
 }

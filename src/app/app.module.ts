@@ -17,10 +17,13 @@ import { IonicStorageModule } from '@ionic/storage';
 import { MyApp } from './app.component';
 import { AuthServiceProvider } from '../providers/auth-service/auth-service';
 import { DataServiceProvider } from '../providers/data-service/data-service';
+import { CourseDataServiceProvider } from '../providers/data-service/course-data-service';
 import { NetworkServiceProvider } from '../providers/network-service/network-service';
 import { CameraServiceProvider } from '../providers/camera-service/camera-service';
 import { Camera } from '@ionic-native/camera';
 import { UtilitiesProvider } from '../providers/utilities/utilities';
+import {FormsModule,  ReactiveFormsModule } from '@angular/forms';
+
 
 @NgModule({
   declarations: [
@@ -35,7 +38,9 @@ import { UtilitiesProvider } from '../providers/utilities/utilities';
     AngularFireStorageModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    IonicStorageModule.forRoot()
+    IonicStorageModule.forRoot(),
+    ReactiveFormsModule,
+    FormsModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -51,6 +56,7 @@ import { UtilitiesProvider } from '../providers/utilities/utilities';
     CameraServiceProvider,
     Camera,
     UtilitiesProvider,
+    CourseDataServiceProvider
   ]
 })
 export class AppModule {}

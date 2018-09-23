@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 import { trigger, state, style, animate, transition } from '@angular/animations';
+import { CourseDataServiceProvider } from '../../providers/data-service/course-data-service';
+import { UtilitiesProvider } from '../../providers/utilities/utilities';
+import { Course } from '../../models/course';
 
 
 /**
@@ -25,17 +28,32 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
 export class CoursesPage {
 
   visibility: String;
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  courses: Course[];
+  constructor(public navCtrl: NavController, private modal: ModalController, private data: CourseDataServiceProvider, private utilities: UtilitiesProvider) {
     this.visibility = 'hidden';
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad CoursesPage');
+  ionViewWillLoad() {
+    this.getCourses();
   }
 
   animate() {
     console.log("hi");
     this.visibility = 'shown'
+  }
+
+  navigateTo(page: string) {
+    let modal = this.modal.create(page);
+    modal.present();
+  }
+
+  async getCourses() {
+    try {
+      this.courses = await this.data.getUserCourses();
+      this.animate();
+    } catch (e) {
+      this.utilities.createToast(e, 3000).present();
+    }
   }
 
 }

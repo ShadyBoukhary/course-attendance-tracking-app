@@ -15,29 +15,10 @@
 
 <ion-content padding class="background">
 
-  <ion-item no-lines>
-    <ion-input placeholder="First Name"></ion-input>
-  </ion-item>
+  <h4 style="color:maroon;">Please update your profile</h4>
 
-  <ion-item no-lines>
-    <ion-input placeholder="Last Name"></ion-input>
-  </ion-item>
 
-  <ion-item no-lines>
-    <ion-input placeholder="Department"></ion-input>
-  </ion-item>
-
-  <ion-item no-lines> 
-    <ion-input placeholder="Title"></ion-input>
-  </ion-item>
-
-  <ion-item no-lines>
-    <ion-input placeholder="Phone"></ion-input>
-  </ion-item>
-
-  <ion-item no-lines>
-    <ion-input placeholder="Office"></ion-input>
-  </ion-item>
+ <edit-profile-form (profile)="updateProfile($event)"></edit-profile-form>
 
 
 

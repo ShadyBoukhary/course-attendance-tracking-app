@@ -7,12 +7,112 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>AddCourse</ion-title>
+    <ion-title>New Course</ion-title>
+    <ion-buttons left>
+      <button ion-button (click)="dismiss()">
+        Cancel
+      </button>
+    </ion-buttons>
+    <ion-buttons right>
+      <button ion-button [disabled]="!createCourseForm.valid" (click)="save()">
+        Save
+      </button>
+    </ion-buttons>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
+<ion-content padding-top>
+
+
+  <form [formGroup]="createCourseForm">
+
+    <ion-list no-lines>
+      <ion-list-header class="header">COURSE DETAILS</ion-list-header>
+      <ion-item no-lines>
+        <ion-label class="label-item">Department</ion-label>
+        <ion-select [formControl]="createCourseForm.controls['department']">
+          <ion-option *ngFor="let department of departments">{{department}}</ion-option>
+        </ion-select>
+
+      </ion-item>
+      <span class="error" *ngIf="!createCourseForm.controls.department.valid && createCourseForm.controls.department.dirty">
+        Cannot be empty
+      </span>
+
+
+      <ion-item no-lines>
+        <ion-input type="number" placeholder="Course number" [formControl]="createCourseForm.controls['courseNum']"></ion-input>
+      </ion-item>
+      <span class="error" *ngIf="!createCourseForm.controls.courseNum.valid && createCourseForm.controls.courseNum.dirty">
+        Cannot be empty
+      </span>
+
+      <ion-item no-lines>
+        <ion-input type="number" placeholder="Section" [formControl]="createCourseForm.controls['section']"></ion-input>
+      </ion-item>
+      <span class="error" *ngIf="!createCourseForm.controls.section.valid && createCourseForm.controls.section.dirty">
+        Cannot be empty
+      </span>
+    </ion-list>
+
+    <ion-list no-lines>
+      <ion-list-header class="header">DATE</ion-list-header>
+
+      <ion-item no-lines>
+        <ion-label class="label-item">Term</ion-label>
+        <ion-select [formControl]="createCourseForm.controls['term']">
+          <ion-option value="Fall">Fall</ion-option>
+          <ion-option value="Spring">Spring</ion-option>
+        </ion-select>
+      </ion-item>
+      <span class="error" *ngIf="!createCourseForm.controls.term.valid && createCourseForm.controls.term.dirty">
+        Cannot be empty
+      </span>
+
+      <ion-item no-lines>
+        <ion-label class="label-item">Year</ion-label>
+        <ion-datetime min="2018" max="2040" displayFormat="YYYY" [formControl]="createCourseForm.controls['year']"></ion-datetime>
+      </ion-item>
+      <span class="error" *ngIf="!createCourseForm.controls.year.valid && createCourseForm.controls.year.dirty">
+        Cannot be empty
+      </span>
+
+      <ion-item no-lines>
+        <ion-label class="label-item">Start date</ion-label>
+        <ion-datetime  min="2018" max="2040-10-31" displayFormat="MM/DD/YYYY" [(ngModel)]="startDate" [ngModelOptions]="{standalone: true}"></ion-datetime>
+      </ion-item>
+
+
+      <ion-item no-lines>
+        <ion-label class="label-item">End date</ion-label>
+
+        <ion-datetime min="2018" max="2040-10-31" displayFormat="MM/DD/YYYY" [(ngModel)]="endDate" [ngModelOptions]="{standalone: true}"></ion-datetime>
+      </ion-item>
+
+    </ion-list>
+
+
+    <ion-list no-lines>
+      <ion-list-header class="header">LOCATION</ion-list-header>
+
+      <ion-item no-lines>
+        <ion-input placeholder="Building" [formControl]="createCourseForm.controls['building']"></ion-input>
+      </ion-item>
+      <span class="error" *ngIf="!createCourseForm.controls.building.valid && createCourseForm.controls.building.dirty">
+        Cannot be empty
+      </span>
+
+      <ion-item no-lines>
+        <ion-input type="number" placeholder="Room number" [formControl]="createCourseForm.controls['room']"></ion-input>
+      </ion-item>
+      <span class="error" *ngIf="!createCourseForm.controls.room.valid && createCourseForm.controls.room.dirty">
+        Cannot be empty
+      </span>
+
+    </ion-list>
+
+  </form>
 
 </ion-content>

@@ -33,7 +33,7 @@ export class DataServiceProvider {
    * @returns {Promise<User>} Promise<User>
    * @memberof DataServiceProvider
    */
-  async getUserProfile() {
+  async getUserProfile(): Promise<any> {
 
     // Get token and userId
     let jwt = await this.auth.getJWT();
@@ -75,11 +75,13 @@ export class DataServiceProvider {
     // Set Headers
     let headers = new HttpHeaders().set(StorageConstants.JSON_WEB_TOKEN, jwt);
     headers.set('Content-Type', 'application/json');
-
+    console.log('PARAMS **************');
+    console.log(JSON.stringify(user));
     // Make HTTP Request
     return new Promise((resolve, reject) => {
-      this.http.put(`${APIConstants.baseUrl}${APIConstants.userUrl}/${userId}`, JSON.stringify(user), {headers})
+      this.http.put(`${APIConstants.baseUrl}${APIConstants.userUrl}/${userId}`, user, {headers})
         .subscribe((dat: any) => {
+          console.log(dat);
           if (dat.status === '404') {
             reject(dat.message);
           }

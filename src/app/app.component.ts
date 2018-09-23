@@ -18,7 +18,7 @@ export class MyApp {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       statusBar.styleDefault();
-      this.rootPage = this.auth.isAuthenticated() ? 'LoginPage' : 'LoginPage'; 
+      this.rootPage = this.auth.isAuthenticated() ? 'CoursesPage' : 'LoginPage'; 
       splashScreen.hide();
     });
   }

@@ -1,0 +1,62 @@
+<form [formGroup]="editProfileForm">
+
+  <ion-item>
+    <ion-label floating>First Name</ion-label>
+    <ion-input [formControl]="editProfileForm.controls['firstName']"></ion-input>
+  </ion-item>
+  <span class="error" *ngIf="!editProfileForm.controls.firstName.valid && editProfileForm.controls.firstName.dirty">
+      Cannot be empty
+    </span>
+  
+
+  <ion-item>
+    <ion-label floating>Last Name</ion-label>
+    <ion-input [formControl]="editProfileForm.controls['lastName']"></ion-input>
+  </ion-item>
+  <span class="error" *ngIf="!editProfileForm.controls.lastName.valid && editProfileForm.controls.lastName.dirty">
+      Cannot be empty
+    </span>
+
+  <ion-item>
+    <ion-label floating>Department</ion-label>
+    <ion-input [formControl]="editProfileForm.controls['department']"></ion-input>
+  </ion-item>
+  <span class="error" *ngIf="!editProfileForm.controls.department.valid && editProfileForm.controls.department.dirty">
+      Cannot be empty
+    </span>
+
+  <ion-item>
+    <ion-label floating>Title</ion-label>
+    <ion-input [formControl]="editProfileForm.controls['title']"></ion-input>
+  </ion-item>
+  <span class="error" *ngIf="!editProfileForm.controls.title.valid && editProfileForm.controls.title.dirty">
+      Cannot be empty
+    </span>
+
+  <ion-item>
+    <ion-label floating>Phone</ion-label>
+    <ion-input [formControl]="editProfileForm.controls['phone']"></ion-input>
+  </ion-item>
+  <span class="error" *ngIf="!editProfileForm.controls.phone.valid && editProfileForm.controls.phone.dirty">
+      Cannot be empty
+    </span>
+
+  <ion-item>
+    <ion-label floating>Office</ion-label>
+    <ion-input [formControl]="editProfileForm.controls['office']"></ion-input>
+  </ion-item>
+  <span class="error" *ngIf="!editProfileForm.controls.office.valid && editProfileForm.controls.office.dirty">
+      Cannot be empty
+    </span>
+
+    <ion-footer no-border padding>
+          <button  ion-button block
+          [disabled]="!editProfileForm.valid"
+          (click)="updateProfile()">
+          Submit</button>
+    </ion-footer>
+  
+
+
+
+</form>

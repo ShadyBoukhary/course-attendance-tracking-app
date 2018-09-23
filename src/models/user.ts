@@ -6,7 +6,7 @@
  */
 export class User {
 
-    private id: string;
+    private _id: string;
     private email: string;
     private firstName: string;
     private lastName: string;
@@ -16,7 +16,7 @@ export class User {
     private department: string;
 
     constructor(jsonData) {
-        this.id = jsonData._id;
+        this._id = jsonData._id;
         this.email = jsonData.email;
         this.firstName = jsonData.firstName;
         this.lastName = jsonData.lastName;
@@ -28,6 +28,26 @@ export class User {
 
 
     // SETTERS
+
+    /**
+     *
+     *
+     * @param {string} firstName
+     * @memberof User
+     */
+    setFirstName(firstName: string) {
+        this.firstName = firstName;
+    }
+
+    /**
+     *
+     *
+     * @param {string} lastName
+     * @memberof User
+     */
+    setLastName(lastName: string) {
+        this.lastName = lastName;
+    }
 
     /**
      * @param {string} office
@@ -71,7 +91,7 @@ export class User {
      * @memberof User
      */
     getId(): string {
-        return this.id;
+        return this._id;
     }
 
     /**

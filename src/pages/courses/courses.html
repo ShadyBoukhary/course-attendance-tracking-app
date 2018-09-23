@@ -8,16 +8,21 @@
 
   <ion-navbar color="primary">
     <ion-title>Courses</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="navigateTo('AddCoursePage')" >
+        <ion-icon name="add"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content class="background card-background-page">
-  <ion-card [@visibilityChanged]="visibility" style="opacity: 0" tappable (click)="animate()">
+  <ion-card *ngFor="let course of courses"  [@visibilityChanged]="visibility" style="opacity: 0" tappable (click)="animate()">
       <img src="https://img.theculturetrip.com/fit-in/1024x/wp-content/uploads/2017/05/5507899161_0172566242_b.jpg"/>
-      <div class="card-title">CMPS 2144-101</div>
-      <div class="card-subtitle">Fall 2018</div>
+      <div class="card-title">{{course.getDepartment()}} {{course.getCourseNum()}}-{{course.getSection()}}</div>
+      <div class="card-subtitle">{{course.getTerm()}} {{course.getYear()}}</div>
   </ion-card>
   <!-- <ion-list no-lines >
     <ion-list-header>
