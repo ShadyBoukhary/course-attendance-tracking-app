@@ -33,7 +33,7 @@ export class CameraServiceProvider {
     try {
       let imageData = await this.camera.getPicture(this.options);
       console.log(imageData);
-      return normalizeURL(imageData);
+      return imageData;
     } catch (e) {
       throw e;
     }

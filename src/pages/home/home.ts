@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ToastController, ViewController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController, ViewController, normalizeURL } from 'ionic-angular';
 import { CameraServiceProvider } from '../../providers/camera-service/camera-service';
 import { DomSanitizer } from '@angular/platform-browser';
 import { DataServiceProvider } from '../../providers/data-service/data-service';
@@ -22,6 +22,7 @@ import {ImageDataServiceProvider} from '../../providers/data-service/image-data-
 export class HomePage {
 
   imageData: string;
+  nonNormalized: string;
   course: Course;
   constructor(public navCtrl: NavController, public navParams: NavParams,
     private cam: CameraServiceProvider, public domSanitizer: DomSanitizer,
@@ -36,7 +37,8 @@ export class HomePage {
 
   async takePhoto() {
     try {
-      this.imageData = await this.cam.takePicture();
+      this.nonNormalized = await this.cam.takePicture();
+      this.imageData = normalizeURL(this.nonNormalized);
     } catch (e) {
       this.utilities.createToast(e, 3000).present();
     }
@@ -44,9 +46,9 @@ export class HomePage {
 
   async submit() {
     try {
-      await this.data.uploadImage(this.imageData, this.course.getId());
+      await this.data.uploadImage(this.nonNormalized, this.course.getId());
     } catch (e) {
-      alert(e.message);
+      alert(e);
     }
   }
 

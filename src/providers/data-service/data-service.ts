@@ -13,7 +13,7 @@ export class DataServiceProvider {
   }
 
 
-  getUsers() {
+  getUsers(): Promise<any> {
     return new Promise((resolve, reject) => {
       this.http.get(`${APIConstants.baseUrl}/23423`)
         .subscribe(dat => {

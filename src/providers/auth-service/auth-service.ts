@@ -89,6 +89,7 @@ export class AuthServiceProvider {
   async isAuthenticated() {
     try {
       let auth = await this.storage.get(StorageConstants.AUTHENTICATED);
+      console.log(auth);
       if (auth === null) { return false; }
       return auth;
     } catch (e) {

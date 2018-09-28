@@ -33,7 +33,7 @@ export class ImageDataServiceProvider {
         const fileTransfer: FileTransferObject = this.transfer.create();
 
         try {
-            let result = await fileTransfer.upload(image, url)
+            let result = await fileTransfer.upload(image, url, options)
             console.log(result);
         } catch (error) {
             throw error;
