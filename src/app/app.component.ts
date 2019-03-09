@@ -11,16 +11,21 @@ export class MyApp {
   rootPage: any;
   authUser$: Subscription;
   x: number;
-  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,
+  constructor(private platform: Platform, private statusBar: StatusBar, splashScreen: SplashScreen,
     private auth: AuthServiceProvider) {
 
-    platform.ready().then(() => {
-      // Okay, so the platform is ready and our plugins are available.
-      // Here you can do any higher level native things you might need.
-      statusBar.styleDefault();
-      this.rootPage = this.auth.isAuthenticated() ? 'CoursesPage' : 'LoginPage'; 
-      splashScreen.hide();
-    });
+    this.loadApp().then(() => splashScreen.hide());
+  }
+
+  async loadApp() {
+
+    await this.platform.ready();
+    this.statusBar.styleDefault();
+    await this.authenticate();
+  }
+
+  async authenticate() {
+    this.rootPage = await this.auth.isAuthenticated() ? 'CoursesPage' : 'LoginPage'; 
   }
 
 }

@@ -86,7 +86,7 @@ export class AuthServiceProvider {
     }
   }
 
-  async isAuthenticated() {
+  async isAuthenticated(): Promise<boolean> {
     try {
       let auth = await this.storage.get(StorageConstants.AUTHENTICATED);
       console.log(auth);
