@@ -14,7 +14,7 @@ export class ImageDataServiceProvider {
     }
 
 
-    async uploadImage(image: string, classId) {
+    async uploadImage(image: string, classId, filename: string) {
 
         // Get token and userId
         let jwt = await this.auth.getJWT();
@@ -22,24 +22,48 @@ export class ImageDataServiceProvider {
         let headers = new HttpHeaders().set(StorageConstants.JSON_WEB_TOKEN, jwt);
         headers.set('Content-Type', 'application/json');
 
-        let url = `${APIConstants.baseUrl}${APIConstants.createImageIUrl}`;
+        let url = `http://cs.mwsu.edu/~griffin/p-lot/bbats/app.php`;
         let options: FileUploadOptions = {
-            fileKey: 'image',
-            chunkedMode: false,
-            mimeType: 'multipart/form-data',
-            params: {'classId': classId }
+            fileKey: 'file',
+            fileName: `${filename}.jpg`,
+            params: {'classId': classId, jwt: jwt }
         };
 
         const fileTransfer: FileTransferObject = this.transfer.create();
 
         try {
             let result = await fileTransfer.upload(image, url, options)
-            console.log(result);
+            console.log(JSON.stringify(result));
         } catch (error) {
             throw error;
         }
-        
     }
+
+    async getImageResults(filename: string): Promise<any> {
+
+        // Get token and userId
+        let jwt = await this.auth.getJWT();
+        let userId = await this.auth.getCurrentUser();
+    
+        // Set Headers
+        let headers = new HttpHeaders().set(StorageConstants.JSON_WEB_TOKEN, jwt);
+    
+        // Make HTTP Request
+        return new Promise((resolve, reject) => {
+          this.http.get(`http://45.32.197.143:8081/images/${filename}`, {headers: headers})
+            .subscribe((result: any) => {
+            //   if (result.status === '404') {
+            //     reject(result.message);
+            //   }
+              console.log(JSON.stringify(result));
+              resolve(result.result);
+            },
+              error => {
+                console.log(JSON.stringify(error));
+                reject(error.message);
+              });
+        });
+      }
 
 
 }

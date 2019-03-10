@@ -1,5 +1,5 @@
 export class APIConstants {
-    static readonly baseUrl = 'http://206.189.236.251:8081';
+    static readonly baseUrl = 'http://45.32.197.143:8081';
     static readonly usersUrl = '/';
     static readonly loginUrl = '/login';
     static readonly signUpUrl = '/users';
