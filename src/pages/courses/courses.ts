@@ -1,3 +1,4 @@
+import { CameraServiceProvider } from './../../providers/camera-service/camera-service';
 import { Component, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 import { trigger, state, style, animate, transition } from '@angular/animations';
@@ -5,6 +6,7 @@ import { CourseDataServiceProvider } from '../../providers/data-service/course-d
 import {AuthServiceProvider} from '../../providers/auth-service/auth-service';
 import { UtilitiesProvider } from '../../providers/utilities/utilities';
 import { Course } from '../../models/course';
+import { ImageDataServiceProvider } from '../../providers/data-service/image-data-service';
 
 
 
@@ -34,7 +36,7 @@ export class CoursesPage {
   visibility: String;
   courses: Course[];
   constructor(public navCtrl: NavController, private modal: ModalController, private data: CourseDataServiceProvider, private utilities: UtilitiesProvider, private detector: ChangeDetectorRef,
-              private auth: AuthServiceProvider) {
+              private auth: AuthServiceProvider, private upload: ImageDataServiceProvider, private camera: CameraServiceProvider) {
     this.visibility = 'hidden';
     this.toggledIndex = -1;
   }
@@ -92,7 +94,14 @@ export class CoursesPage {
     } catch (e) {
       
     }
-    
+  
+  }
+  async uploadImage() {
+    try {
+      let image = await this.camera.takePicture();
+    } catch (error) {
+      console.log(error);
+    }
   }
 
 }

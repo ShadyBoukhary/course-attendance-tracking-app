@@ -37,17 +37,27 @@ export class HomePage {
 
   async takePhoto() {
     try {
-      this.nonNormalized = await this.cam.takePicture();
-      this.imageData = normalizeURL(this.nonNormalized);
+      this.imageData = await this.cam.takePicture();
+      console.log(this.imageData);
     } catch (e) {
       this.utilities.createToast(e, 3000).present();
     }
   }
 
   async submit() {
+    let loader = this.utilities.createLoading('Uploading image...');
+    loader.present();
+    let time = Math.floor(Date.now() / 1000).toString();
     try {
-      await this.data.uploadImage(this.nonNormalized, this.course.getId());
+      await this.data.uploadImage(this.imageData, this.course.getId(), time);
+      await loader.dismiss();
+      this.utilities.createToast('Image has been uploaded!', 2000).present();
+      this.delete();
+      let results = await this.data.getImageResults(time);
+      alert(JSON.stringify(results));
+      //this.dismiss();
     } catch (e) {
+      await loader.dismiss();
       alert(e);
     }
   }

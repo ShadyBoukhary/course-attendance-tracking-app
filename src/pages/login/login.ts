@@ -5,13 +5,6 @@ import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
 import { LoginResponse } from '../../models/login/login-response.interface';
 import { UtilitiesProvider } from '../../providers/utilities/utilities';
 
-/**
- * Generated class for the LoginPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-
 @IonicPage()
 @Component({
   selector: 'page-login',
