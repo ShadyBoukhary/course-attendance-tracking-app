@@ -22,7 +22,13 @@
 
 
 <ion-content class="background card-background-page">
-
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content
+      pullingIcon="arrow-dropdown"
+      pullingText="Pull to refresh"
+      refreshingSpinner="circles">
+    </ion-refresher-content>
+  </ion-refresher>
   <ion-card *ngFor="let course of courses; let i = index" [@visibilityChanged]="visibility" style="opacity: 0">
     <div tappable (click)="toggleButtons(i)" class="image-container">
       <img *one-time [src]="getRandomImage()" />
@@ -54,5 +60,7 @@
     </div>
 
   </ion-card>
+
+  <div class="no-courses" *ngIf="courses?.length === 0">No courses found.</div>
 
 </ion-content>

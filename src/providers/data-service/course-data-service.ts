@@ -15,7 +15,7 @@ export class CourseDataServiceProvider {
 
 
     async createCourse(course: Course) {
-
+        course.getStudents().forEach((student) => delete student.imageData);
         // Get token and userId
         let jwt = await this.auth.getJWT();
         // Set Headers
@@ -47,13 +47,12 @@ export class CourseDataServiceProvider {
         // Get token and userId
         let jwt = await this.auth.getJWT();
         let userId = await this.auth.getCurrentUser();
-
+        console.log(`User ID: ${userId}`);
         // Set Headers
         let headers = new HttpHeaders().set(StorageConstants.JSON_WEB_TOKEN, jwt);
         headers.set('Content-Type', 'application/json');
 
-        let params = new HttpParams();
-        params.set('userId', userId);
+        let params = new HttpParams().set('userId', userId);
 
         // Make HTTP Request
         return new Promise((resolve, reject) => {
@@ -80,7 +79,7 @@ export class CourseDataServiceProvider {
         let courses: Course[] = [];
         data.forEach(element => {
             let course = new Course(element.ownerId, element.department, element.courseNum, element.section, element.term, element.year, element.room, element.building, element.startDate, element.endDate);
-            course.setId(element._id);
+            course.setId(element.id);
             courses.push(course);
         });
         return courses;

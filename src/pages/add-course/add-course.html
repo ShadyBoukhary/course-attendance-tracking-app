@@ -115,4 +115,20 @@
 
   </form>
 
+  <ion-list>
+    <ion-list-header class="header">Students</ion-list-header>
+    <ion-item *ngFor="let student of students; let i = index">
+      <ion-input [(ngModel)]="students[i].name"></ion-input>
+      <button class="round" color="danger" ion-button item-end icon-only>
+        <ion-icon name="remove"></ion-icon>
+      </button>
+    </ion-item>
+
+    <button ion-button clear block (click)="addStudent()">Add Student</button>
+
+  </ion-list>
+
+
+  
+
 </ion-content>

@@ -1,0 +1,37 @@
+page-results {
+    .item-absent {
+       background-color: #d35050;
+       color: white;
+       border-radius: 20px;
+       margin-top: 10px;
+       p {
+           color: white;
+       }
+    }
+
+    .item-present {
+       background-color: #3fc25f;
+       color: white;
+       border-radius: 20px;
+       margin-top: 10px;
+       p {
+           color: white;
+       }
+    }
+
+    .confirm-button {
+        height: 50px;
+        border-radius: 20px;
+        font-size: 16px;
+        
+    }
+    .item-present-low {
+       background-color: #c09441;
+       color: white;
+       border-radius: 20px;
+       margin-top: 10px;
+       p {
+           color: white;
+       }
+    }
+}

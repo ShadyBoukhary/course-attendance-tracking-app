@@ -1,11 +1,13 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ViewController, ModalController } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DEPARTMENTS } from '../../providers/constants';
 import { Course } from '../../models/course';
 import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
 import { UtilitiesProvider } from '../../providers/utilities/utilities';
 import { CourseDataServiceProvider } from '../../providers/data-service/course-data-service';
+import { Student } from '../../models/student';
+import { ImageDataServiceProvider } from '../../providers/data-service/image-data-service';
 
 /**
  * Generated class for the AddCoursePage page.
@@ -25,8 +27,13 @@ export class AddCoursePage {
   departments: string[];
   startDate: string;
   endDate: string;
-  constructor(private view: ViewController, private formBuilder: FormBuilder, private auth: AuthServiceProvider, private utilities: UtilitiesProvider, private data: CourseDataServiceProvider) {
+  students: Student[];
+  courseId: string;
+  constructor(private view: ViewController, private formBuilder: FormBuilder, private auth: AuthServiceProvider, private utilities: UtilitiesProvider, private data: CourseDataServiceProvider,
+              private modal: ModalController, private imageDataProvider: ImageDataServiceProvider) {
     this.departments = DEPARTMENTS;
+    this.students = [];
+    this.courseId = Math.floor(Date.now() / 1000).toString();
 
     this.createCourseForm = this.formBuilder.group({
       department: ['', Validators.required],
@@ -45,7 +52,7 @@ export class AddCoursePage {
 
   async save() {
 
-    if (this.startDate != null && this.endDate != null) {
+    if (this.startDate != null && this.endDate != null && this.students.length > 0) {
 
       let loader = this.utilities.createLoading('Creating course...');
         loader.present();
@@ -66,12 +73,18 @@ export class AddCoursePage {
           startDate.getTime(),
           endDate.getTime());
 
-
+        course.setId(this.courseId);
+        course.addStudents(this.students);
         console.log(course);
 
 
 
+        let promises = course.getStudents().map((student)=> this.imageDataProvider.uploadImage(student.imageData, course.getId(), student.image));
+        await Promise.all(promises);
         await this.data.createCourse(course);
+        await this.imageDataProvider.train(course.getId());
+
+        console.log('Done Uploading');
         console.log('hi');
         loader.dismiss();
         this.utilities.createToast('Course created!', 3000).present();
@@ -79,6 +92,7 @@ export class AddCoursePage {
 
       } catch (e) {
         loader.dismiss();
+        console.log(JSON.stringify(e));
         this.utilities.createToast(e, 3000).present();
 
       }
@@ -90,6 +104,21 @@ export class AddCoursePage {
     }
 
 
+  }
+
+  addStudent() {
+    let modal = this.modal.create('AddStudentPage', {courseId: this.courseId});
+    modal.onDidDismiss((data) => {
+      if (data.added == true) {
+        console.log(JSON.stringify(data.student.name));
+        this.students.push(data.student);
+      }
+    });
+    modal.present();
+  }
+
+  removeStudent(i: number) {
+    this.students.splice(i, 1);
   }
 
   dismiss() {

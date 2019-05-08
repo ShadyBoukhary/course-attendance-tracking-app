@@ -47,18 +47,22 @@ export class HomePage {
   async submit() {
     let loader = this.utilities.createLoading('Uploading image...');
     loader.present();
-    let time = Math.floor(Date.now() / 1000).toString();
+    let date = new Date();
+    let month = (date.getMonth() + 1).toString().padStart(2, '0');
+    let day = date.getDate().toString().padStart(2, '0');
+    let year = date.getFullYear();
+    let filename = `inf-${this.course.getId()}-${month}${day}${year}`;
     try {
-      await this.data.uploadImage(this.imageData, this.course.getId(), time);
+      await this.data.uploadImage(this.imageData, this.course.getId(), filename);
       await loader.dismiss();
       this.utilities.createToast('Image has been uploaded!', 2000).present();
       this.delete();
-      let results = await this.data.getImageResults(time);
+      let results = await this.data.getImageResults(filename);
       alert(JSON.stringify(results));
       //this.dismiss();
     } catch (e) {
       await loader.dismiss();
-      alert(e);
+      alert(JSON.stringify(e));
     }
   }
 

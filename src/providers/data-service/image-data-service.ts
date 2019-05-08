@@ -32,6 +32,7 @@ export class ImageDataServiceProvider {
         const fileTransfer: FileTransferObject = this.transfer.create();
 
         try {
+            console.log('Uploading');
             let result = await fileTransfer.upload(image, url, options)
             console.log(JSON.stringify(result));
         } catch (error) {
@@ -65,5 +66,31 @@ export class ImageDataServiceProvider {
         });
       }
 
+      async train(courseId: string): Promise<any> {
 
+        // Get token and userId
+        let jwt = await this.auth.getJWT();
+        let userId = await this.auth.getCurrentUser();
+    
+        // Set Headers
+        let headers = new HttpHeaders().set(StorageConstants.JSON_WEB_TOKEN, jwt);
+
+        let params = new HttpParams();
+        params.set('setupClass', courseId);
+        // Make HTTP Request
+        return new Promise((resolve, reject) => {
+          this.http.get(`http://cs.mwsu.edu/~griffin/p-lot/bbats/app.php?setupClass=${courseId}`)
+            .subscribe((result: any) => {
+            //   if (result.status === '404') {
+            //     reject(result.message);
+            //   }
+              console.log(JSON.stringify(result));
+              resolve(result.result);
+            },
+              error => {
+                console.log(JSON.stringify(error));
+                reject(error.message);
+              });
+        });
+      }
 }

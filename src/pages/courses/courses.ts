@@ -26,7 +26,7 @@ import { ImageDataServiceProvider } from '../../providers/data-service/image-dat
     trigger('visibilityChanged', [
       state('shown', style({ opacity: 1 })),
       state('hidden', style({ opacity: 0 })),
-      transition('* => *', animate('500ms'))
+      transition('hidden => shown', animate('5s 1000ms ease-in'))
     ])
   ]
 })
@@ -102,6 +102,11 @@ export class CoursesPage {
     } catch (error) {
       console.log(error);
     }
+  }
+
+  async doRefresh(event) {
+    await this.getCourses();
+    event.complete();
   }
 
 }

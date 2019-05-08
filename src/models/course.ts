@@ -1,6 +1,7 @@
+import { Student } from './student';
 export class Course {
 
-    private _id?: string;
+    private id?: string;
  //   private classId: string;
     private ownerId: string;
     private department: string;
@@ -12,6 +13,7 @@ export class Course {
     private building: string;
     private startDate: number;
     private endDate: number;
+    public students: Student[];
 
     constructor(ownerId: string, department: string, courseNum: string,
         section: string, term: string, year: string, room: string, building: string,
@@ -28,6 +30,7 @@ export class Course {
         this.building = building;
         this.startDate = startDate;
         this.endDate = endDate;
+        this.students = [];
     }
 
     // SETTERS
@@ -38,7 +41,7 @@ export class Course {
      * @memberof Course
      */
     setId(id: string) {
-        this._id = id;
+        this.id = id;
     }
 
     // /**
@@ -136,7 +139,7 @@ export class Course {
      * @memberof Course
      */
     getId() {
-        return this._id;
+        return this.id;
     }
 
     // /**
@@ -231,8 +234,20 @@ export class Course {
         return new Date(this.startDate).toDateString();
     }
 
+    getStudents() {
+        return this.students;
+    }
+
     getFormattedEndDate() {
         return new Date(this.endDate).toDateString();
+    }
+
+    addStudent(student: Student) {
+        this.students.push(student);
+    }
+
+    addStudents(students: Student[]) {
+        this.students.push(...students);
     }
 
     // toJSON() {

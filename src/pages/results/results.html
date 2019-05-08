@@ -1,0 +1,42 @@
+<!--
+  Generated template for the ResultsPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Attendance Results</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <img src="assets/imgs/output.jpg" alt="Attendance results">
+  <ion-list no-lines>
+
+    <div *ngFor="let result of results">
+      <ion-item *ngIf="result.status && result.highConfidence" class="item-present">
+        {{result.name}}
+        <p>Status: Present</p>
+        <ion-icon item-end name="checkmark"></ion-icon>
+      </ion-item>
+      <ion-item *ngIf="!result.status" class="item-absent">
+        {{result.name}}
+        <p>Status: Absent</p>
+        <ion-icon item-end name="close"></ion-icon>
+        
+      </ion-item>
+      <ion-item *ngIf="result.status && !result.highConfidence" class="item-present-low">
+        {{result.name}}
+        <p>Status: Present</p>
+        <ion-icon item-end name="checkmark"></ion-icon>
+      </ion-item>
+    </div>
+
+  </ion-list>
+
+  <button class="confirm-button" block ion-button>Confirm</button>
+</ion-content>
